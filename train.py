@@ -67,7 +67,7 @@ class CustomDataset(Dataset):
             if (img > 1).any():
                 img = img / 255.0
             return img
-        scale=0.3
+        scale=0.2
         image= preprocess_image(image,scale)
         mask= preprocess_mask(mask,scale)
                
@@ -126,8 +126,8 @@ def train_model(model):
     
 if __name__ == '__main__':
     
-    device = torch.device("cpu" if torch.cuda.is_available() else "cpu")
-    model = UNet(n_channels=3, n_classes=1, bilinear=True)  #n_classes is one because we are trying to detect segmentation.
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = UNet( 1, 3)  #n_classes is one because we are trying to detect segmentation.
     model.to(device) 
     #try:
     model=train_model(model)
