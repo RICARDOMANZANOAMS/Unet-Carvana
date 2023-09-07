@@ -20,7 +20,7 @@ def train_model(model):
     batch_size = 2
     image_size = 256
    
-    train_dataset = CustomDataset(root_dir="C:/RICARDO/2023 CISTECH BACKUP/cistech/2023/NRCan/Carvana 1/Unet-Carvana/Dataset/short_dataset/train")
+    train_dataset = CustomDataset(root_dir="C:/RICARDO/2023 CISTECH BACKUP/cistech/2023/NRCan/UNET ANALYSIS/Carvana 1/Unet-Carvana/Dataset/short_dataset/train")
     
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
