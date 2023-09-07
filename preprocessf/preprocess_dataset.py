@@ -19,7 +19,8 @@ class CustomDataset(Dataset):
     @staticmethod
     def preprocess(pil_img_arr,scale):
         pil_img=pil_img_arr[0]    # extract image from array
-        
+        print("image")      
+        print(pil_img)
         w, h = pil_img.size
         newW, newH = int(scale * w), int(scale * h)
         
@@ -36,17 +37,32 @@ class CustomDataset(Dataset):
                     mask[img == v] = i
                 else:
                     mask[(img == v).all(-1)] = i
+            print("mask")
+            print(mask)
+            print(mask.shape)
             return mask
         else:   
             pil_img = pil_img.resize((newW, newH), resample=Image.BICUBIC)
-            img = np.asarray(pil_img)             
+            img = np.asarray(pil_img)    
+            print("image inside")
+            print(img)
+            print(img.shape)
+            print(type(img))
             if img.ndim == 2:
                 img = img[np.newaxis, ...]
             else:
                 img = img.transpose((2, 0, 1))
 
-            if (img > 1).any():
-                img = img / 255.0
+            # if (img > 1).any():
+            #     img = img / 255.0
+
+            print("image after trans")
+            print(img)
+            print(img.shape)
+            print(type(img))
+            print(img[0])
+            print(type(img[0]))
+            print(type(img[0][0]))
             return img
     
     def __getitem__(self, idx):
