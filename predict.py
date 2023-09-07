@@ -10,7 +10,7 @@ from preprocessf import CustomDataset
 import torch.nn.functional as F
 from PIL import Image
 import matplotlib.pyplot as plt
-
+import numpy as np
 def plot_img_and_mask(img, mask):
     classes = mask.max() + 1
     fig, ax = plt.subplots(1, classes + 1)
@@ -48,10 +48,19 @@ if __name__ == '__main__':
     device = torch.device('cpu' if torch.cuda.is_available() else 'cpu')
     #args = get_args()
     logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')   
-    image_path='C://RICARDO//2023 CISTECH BACKUP//cistech//2023//NRCan//Carvana 1//Unet-Carvana//Dataset//Test//Images//c7a94c46a3b2_05.jpg'
+    image_path='C://RICARDO//2023 CISTECH BACKUP//cistech//2023//NRCan//UNET ANALYSIS//Carvana 1//Unet-Carvana//Dataset//Test//Images//c7a94c46a3b2_05.jpg'
     full_img=Image.open(image_path)
+    full_img_array = np.asarray(full_img)
+    print("image")
+    print(full_img_array)
+    print(full_img_array.shape)
+
+    
     image_arr = [full_img,'image'] #read image and label as image
+  
+
     img=torch.from_numpy(CustomDataset.preprocess(image_arr,0.3))
+    
     img = img.to(device=device, dtype=torch.float32)
 
     model = UNet(n_channels=3, n_classes=1, bilinear=True)  #n_classes is one because we are trying to detect segmentation.
